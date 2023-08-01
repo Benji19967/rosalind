@@ -8,5 +8,5 @@ def read_input(filename: str) -> str:
     path = ROSALIND_DIR / INPUTS_DIR / filename
 
     with open(path.resolve()) as f:
-        input = f.read()
+        input = f.read().strip()
     return input
