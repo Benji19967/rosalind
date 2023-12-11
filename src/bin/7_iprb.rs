@@ -46,7 +46,6 @@ fn probability_dominant(k: u64, m: u64, n: u64) -> f64 {
     let p = (k_k * 1.0 + m_m * 0.75 + n_n * 0.0 + k_m * 1.0 + k_n * 1.0 + m_n * 0.5)
         / total_combinations;
 
-    println!("{}", p);
     p
 }
 
@@ -55,7 +54,7 @@ mod tests {
     use crate::probability_dominant;
 
     #[test]
-    fn fib1() {
+    fn case1() {
         assert_eq!(probability_dominant(2, 2, 2), 0.78333);
     }
 }
