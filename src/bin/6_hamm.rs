@@ -33,15 +33,15 @@ mod tests {
     use crate::hamming_distance;
 
     #[test]
-    fn fib1() {
+    fn hamm1() {
         assert_eq!(hamming_distance("A", "G"), 1);
     }
     #[test]
-    fn fib2() {
+    fn hamm2() {
         assert_eq!(hamming_distance("AC", "AG"), 1);
     }
     #[test]
-    fn fib3() {
+    fn hamm3() {
         assert_eq!(hamming_distance("ACAT", "AGTA"), 3);
     }
 }

@@ -55,6 +55,6 @@ mod tests {
 
     #[test]
     fn case1() {
-        assert_eq!(probability_dominant(2, 2, 2), 0.78333);
+        assert_eq!(probability_dominant(2, 2, 2), 0.7833333333333333);
     }
 }
