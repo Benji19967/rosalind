@@ -19,10 +19,23 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+/// The probability for pairs is computed using a Punnett square.
+///
+/// For example, m_n:
+///
+///      Y  y
+/// ---------
+/// y | yY yy
+/// y | yY yy
+///
+/// --> 2 of 4 are dominant, so the probablity that a pair of m and n
+/// produce an individual possessing a dominant allel is 0.5
+///
 fn probability_dominant(k: u64, m: u64, n: u64) -> f64 {
     let total_population = k + m + n;
     let total_combinations = combinations(total_population, 2);
 
+    // Total number of possible pairs for each pair of organisms
     let k_k = combinations(k, 2);
     let m_m = combinations(m, 2);
     let n_n = combinations(n, 2);
