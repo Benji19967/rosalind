@@ -1,7 +1,5 @@
 use std::io::{self, Read};
 
-use itertools::Itertools;
-
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn main() -> Result<()> {
@@ -11,28 +9,27 @@ fn main() -> Result<()> {
     for line in input.lines() {
         strings.push(line);
     }
-    let d = find_substrings(strings[0], strings[1]);
-    println!("{:?}", d.iter().map(|e| e.to_string()).join(" "));
+    let profile_matrix = build_profile_matrix();
+    let consensus_string = build_consensus_string();
 
     Ok(())
 }
 
-fn find_substrings(s: &str, t: &str) -> Vec<u32> {
-    let mut locations: Vec<u32> = vec![];
-    for i in 0..(s.len() - t.len() + 1) {
-        if &s[i..i + t.len()] == t {
-            locations.push((i + 1) as u32);
-        }
-    }
-    locations
+fn build_profile_matrix() -> Vec<Vec<u32>> {
+    unimplemented!()
+}
+
+fn build_consensus_string() -> Vec<Vec<u32>> {
+    unimplemented!()
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::find_substrings;
+    use crate::build_consensus_string;
+    use crate::build_profile_matrix;
 
-    #[test]
-    fn subs1() {
-        assert_eq!(find_substrings("ATATA", "TA"), vec![2, 4]);
-    }
+    // #[test]
+    // fn cons1() {
+    //     assert_eq!(create_profile_matrix(), vec![2, 4]);
+    // }
 }
