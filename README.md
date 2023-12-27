@@ -9,5 +9,5 @@ rosalind.info
 ## Running a problem
 
 ```bash
-cargo run --release --bin 8_prot < inputs/rosalind_prot.txt
+cargo run --release --bin 008_prot < inputs/rosalind_prot.txt
 ```
