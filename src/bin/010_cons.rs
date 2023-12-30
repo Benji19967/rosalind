@@ -7,7 +7,7 @@ fn main() -> Result<()> {
     let mut input = String::new();
     io::stdin().read_to_string(&mut input)?;
     let dna_strings = utils::read_fasta(input);
-    let profile_matrix = build_profile_matrix(&dna_strings).unwrap();
+    let profile_matrix = build_profile_matrix(&dna_strings.values().collect()).unwrap();
     let consensus_string = build_consensus_string(&profile_matrix);
     println!("{:?}", consensus_string);
     display_profile_matrix(&profile_matrix);
@@ -15,10 +15,10 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn build_profile_matrix(dna_strings: &utils::DnaStrings) -> Result<Vec<Vec<u32>>> {
-    let len_dna_strings = dna_strings.values().next().unwrap().len();
+fn build_profile_matrix(dna_strings: &Vec<&String>) -> Result<Vec<Vec<u32>>> {
+    let len_dna_strings = dna_strings[0].len();
     let mut profile_matrix: Vec<Vec<u32>> = vec![vec![0; len_dna_strings]; 4];
-    for dna_string in dna_strings.values() {
+    for dna_string in dna_strings {
         for (i, c) in dna_string.chars().enumerate() {
             match c {
                 'A' => Ok(profile_matrix[0][i] += 1),
