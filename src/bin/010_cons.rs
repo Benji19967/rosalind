@@ -16,15 +16,27 @@ fn main() -> Result<()> {
 }
 
 fn build_profile_matrix(dna_strings: &Vec<&String>) -> Result<Vec<Vec<u32>>> {
-    let len_dna_strings = dna_strings[0].len();
+    let len_dna_strings: usize = dna_strings[0].len();
     let mut profile_matrix: Vec<Vec<u32>> = vec![vec![0; len_dna_strings]; 4];
     for dna_string in dna_strings {
         for (i, c) in dna_string.chars().enumerate() {
             match c {
-                'A' => Ok(profile_matrix[0][i] += 1),
-                'C' => Ok(profile_matrix[1][i] += 1),
-                'G' => Ok(profile_matrix[2][i] += 1),
-                'T' => Ok(profile_matrix[3][i] += 1),
+                'A' => {
+                    profile_matrix[0][i] += 1;
+                    Ok(())
+                }
+                'C' => {
+                    profile_matrix[1][i] += 1;
+                    Ok(())
+                }
+                'G' => {
+                    profile_matrix[2][i] += 1;
+                    Ok(())
+                }
+                'T' => {
+                    profile_matrix[3][i] += 1;
+                    Ok(())
+                }
                 _ => Err("Found invalid character in DNA string"),
             }?;
         }
@@ -32,7 +44,7 @@ fn build_profile_matrix(dna_strings: &Vec<&String>) -> Result<Vec<Vec<u32>>> {
     Ok(profile_matrix)
 }
 
-fn build_consensus_string(profile_matrix: &Vec<Vec<u32>>) -> String {
+fn build_consensus_string(profile_matrix: &[Vec<u32>]) -> String {
     let len_dna_strings = profile_matrix[0].len();
     let mut max_occurence: Vec<u32> = vec![0; len_dna_strings];
     let mut consensus_string: Vec<char> = vec!['A'; len_dna_strings];
@@ -48,13 +60,13 @@ fn build_consensus_string(profile_matrix: &Vec<Vec<u32>>) -> String {
     consensus_string.into_iter().collect()
 }
 
-fn display_profile_matrix(profile_matrix: &Vec<Vec<u32>>) {
+pub(crate) fn display_profile_matrix(profile_matrix: &[Vec<u32>]) {
     for (row_idx, row) in profile_matrix.iter().enumerate() {
         let symbol = row_idx_to_symbol(row_idx);
         println!(
             "{}: {}",
             symbol,
-            row.into_iter()
+            row.iter()
                 .map(|e| e.to_string())
                 .collect::<Vec<String>>()
                 .join(" ")

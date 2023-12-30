@@ -29,7 +29,7 @@ fn fib(n: usize, k: u64) -> u64 {
     dp[1] = 1;
 
     for i in 2..=n {
-        dp[i as usize] = dp[(i - 1) as usize] + k * dp[(i - 2) as usize];
+        dp[i] = dp[i - 1] + k * dp[i - 2];
     }
     dp[n]
 }

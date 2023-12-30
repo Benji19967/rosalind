@@ -12,7 +12,7 @@ pub fn read_fasta(s: String) -> DnaStrings {
     let mut string_id: &str = "";
     let mut string_list: Vec<&str> = Vec::new();
     for line in s.lines() {
-        if line.starts_with(">") {
+        if line.starts_with('>') {
             if first {
                 string_id = get_string_id(line);
                 first = false;
