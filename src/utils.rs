@@ -1,7 +1,13 @@
-use std::collections::HashMap;
+use std::error::Error;
+use std::{collections::HashMap, path::Path};
 
 /// <ID, DNA string>
 pub type DnaStrings = HashMap<String, String>;
+
+pub fn read_fasta_file(filename: &Path) -> Result<DnaStrings, Box<dyn Error>> {
+    let contents = std::fs::read_to_string(filename)?;
+    Ok(read_fasta(contents))
+}
 
 /// This should take in a file object, or a string, and return the
 /// DNA strings in the file with their corresponding ID.
