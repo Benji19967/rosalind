@@ -2,8 +2,8 @@ use std::error::Error;
 use std::io::{self, Read};
 use std::{collections::HashMap, path::Path};
 
-/// <ID, DNA string>
-pub type DnaStrings = HashMap<String, String>;
+/// <ID, Sequence>
+pub type Sequences = HashMap<String, String>;
 
 pub fn read_input_from_stdin() -> Result<String, Box<dyn Error>> {
     let mut input = String::new();
@@ -11,16 +11,16 @@ pub fn read_input_from_stdin() -> Result<String, Box<dyn Error>> {
     Ok(input)
 }
 
-pub fn read_fasta_file(filename: &Path) -> Result<DnaStrings, Box<dyn Error>> {
+pub fn read_fasta_file(filename: &Path) -> Result<Sequences, Box<dyn Error>> {
     let contents = std::fs::read_to_string(filename)?;
     Ok(read_fasta(contents))
 }
 
 /// This should take in a file object, or a string, and return the
-/// DNA strings in the file with their corresponding ID.
+/// sequences in the file with their corresponding ID.
 ///
-pub fn read_fasta(s: String) -> DnaStrings {
-    let mut dna_strings: DnaStrings = HashMap::new();
+pub fn read_fasta(s: String) -> Sequences {
+    let mut sequences: Sequences = HashMap::new();
     let mut first = true;
     let mut string_id: &str = "";
     let mut string_list: Vec<&str> = Vec::new();
@@ -30,7 +30,7 @@ pub fn read_fasta(s: String) -> DnaStrings {
                 string_id = get_string_id(line);
                 first = false;
             } else {
-                dna_strings.insert(string_id.into(), string_list.join(""));
+                sequences.insert(string_id.into(), string_list.join(""));
                 string_id = get_string_id(line);
                 string_list = Vec::new();
             }
@@ -38,8 +38,8 @@ pub fn read_fasta(s: String) -> DnaStrings {
             string_list.push(line);
         }
     }
-    dna_strings.insert(string_id.into(), string_list.join(""));
-    dna_strings
+    sequences.insert(string_id.into(), string_list.join(""));
+    sequences
 }
 
 pub fn get_string_id(s: &str) -> &str {
