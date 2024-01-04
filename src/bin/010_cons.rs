@@ -18,25 +18,8 @@ fn build_profile_matrix(dna_strings: &Vec<&String>) -> Result<Vec<Vec<u32>>> {
     let mut profile_matrix: Vec<Vec<u32>> = vec![vec![0; len_dna_strings]; 4];
     for dna_string in dna_strings {
         for (i, c) in dna_string.chars().enumerate() {
-            match c {
-                'A' => {
-                    profile_matrix[0][i] += 1;
-                    Ok(())
-                }
-                'C' => {
-                    profile_matrix[1][i] += 1;
-                    Ok(())
-                }
-                'G' => {
-                    profile_matrix[2][i] += 1;
-                    Ok(())
-                }
-                'T' => {
-                    profile_matrix[3][i] += 1;
-                    Ok(())
-                }
-                _ => Err("Found invalid character in DNA string"),
-            }?;
+            let index = "ACGT".find(c).unwrap();
+            profile_matrix[index][i] += 1;
         }
     }
     Ok(profile_matrix)
