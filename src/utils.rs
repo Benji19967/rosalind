@@ -1,8 +1,15 @@
 use std::error::Error;
+use std::io::{self, Read};
 use std::{collections::HashMap, path::Path};
 
 /// <ID, DNA string>
 pub type DnaStrings = HashMap<String, String>;
+
+pub fn read_input_from_stdin() -> Result<String, Box<dyn Error>> {
+    let mut input = String::new();
+    io::stdin().read_to_string(&mut input)?;
+    Ok(input)
+}
 
 pub fn read_fasta_file(filename: &Path) -> Result<DnaStrings, Box<dyn Error>> {
     let contents = std::fs::read_to_string(filename)?;

@@ -1,11 +1,9 @@
 use rosalind::utils;
-use std::io::{self, Read};
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn main() -> Result<()> {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input)?;
+    let input = utils::read_input_from_stdin()?;
     let dna_strings = utils::read_fasta(input);
     let profile_matrix = build_profile_matrix(&dna_strings.values().collect()).unwrap();
     let consensus_string = build_consensus_string(&profile_matrix);
